@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://cdn.pccomponentes.com/img/logos/logo-pccomponentes.svg
+    "
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Proyecto 2 Landing DOM</title>
+  </head>
+  <body>
+    <header id="header"></header>
+    <main>
+      <div id="app">
+        <div id="filtros-div">
+          <section class="filters-seller">
+            <p>Seller</p>
+            <select id="selector">
+              <option value="All">All</option>
+            </select>
+          </section>
+          <section class="filters-price">
+            <div id="price-filter-div">
+              <p>Max price</p>
+              <input type="number" id="price-selector" />
+            </div>
+            <div id="remove-btn-div">
+              <button id="btn-price"><img src="./assets/filtro.png" alt="filtro" id="filter-img"></button>
+              <button id="btn-remove-filter"><img src="./assets/filtroclean.png" alt="borrar-filtro" id="clear-filter-img"></button>
+            </div>
+          </section>
+        </div>
+        <section class="products"></section>
+      </div>
+    </main>
+    <footer>
+       <nav>
+      <div id="logo-content">
+      <img src="https://cdn.pccomponentes.com/img/logos/logo-pccomponentes.svg" alt="logo">
+    </div>
+    <div id="whas-contact">
+      <div  id="footer-whas-icon"><img src="assets/whastapp_icon.png" alt="icon-whas">
+      </div>
+        <div id="whas-content"><p>Contacto por Whastapp </p>
+        <p> 000 00 00 00</p></div>
+      </div>
+    <div id="schedule">
+    <p>9:00 - 14:00 h / 16:00 - 18:00 h</p>
+    <p>info@pccomponentes.com</p>
+    </div>
+    </nav>
+    <nav>
+      <h5>Información</h5>
+      <ul>
+        <li>
+          <a href="#">Envios y Plazos</a>
+        </li>
+        <li>
+          <a href="#">Cambios y devoluciones</a>
+        </li>
+        <li>
+          <a href="#">Aviso legal</a>
+        </li>
+        <li>
+          <a href="#">Inicio</a>
+        </li>
+        <li>
+          <a href="#">Condiciones de uso</a>
+        </li>
+      </ul>
+    </nav>
+    <nav>
+      <h5>Nuestra empresa</h5>
+      <ul>
+        <li>
+          <a href="#">Quienes Somos</a>
+        </li>
+        <li>
+          <a href="#">Contacte con nosotros</a>
+        </li>
+        </li>
+      </ul>
+    </nav>
+    <nav>
+      <h5>Su cuenta</h5>
+      <ul>
+        <li>
+          <a href="#">Datos Personales</a>
+        </li>
+        <li>
+          <a href="#">Historial de pedidos</a>
+        </li>
+        <li>
+          <a href="#">Direcciones</a>
+        </li>
+      </ul>
+    </nav>
+    <nav>
+      <h5>Información de la tienda</h5>
+      <ul>
+        <li>
+          <a href="#">Pc Componentes España S.L.</a>
+        </li>
+        <li>
+          <a href="#">CIF: BXXXXXXX</a>
+        </li>
+        <li>
+          <a href="#">C/ Aigüeta, 170 17100 La Bisbal d'Empordá (Girona)</a>
+        </li>
+        <li>
+          <a href="#">Envienos un WhatsApp: 000 00 00 00</a>
+        </li>
+        <li>
+          <a href="#">Evienos un correo electrónico: info@pccomponentes.com</a>
+        </li>
+      </ul>
+    </nav>
+    </footer>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

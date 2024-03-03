@@ -1,0 +1,48 @@
+1.1 Introduce primero en tu archivo un objeto que simule 
+todos los elementos de la tienda con un formato similar al siguiente:
+
+const products = [
+  {
+    name: 'HP Essentials 255 G8 AMD',
+    price: 289,
+    stars: 4,
+    reviews: 250,
+    seller: 'PcComponentes',
+    image: 'https://thumb.pccomponentes.com/w-300-300/articles/1005/10057282/1639-hp-essential-255-g8-amd-3020e-8gb-256gb-ssd-156.jpg'
+  },
+  // Añade aquí al menos 9 productos más para tener un total de 10 productos
+  // puedes cambiar los campos de cada objeto si es necesario para tu diseño...
+];
+
+Criterio de aceptación
+-----------------------
+  1. Criterio JavaScript.
+  ......................
+  [1.1] El HTML de la web se genera de forma dinámica mediante los tag templates que se habrá definido en JavaScript. Se permitirá tener de base dos secciones .filter y .products para introducir elementos dentro con JavaScript para el DOM.
+
+  [1.2] Se recorrerá la lista de productos y se creará una carta de producto para cada elemento de forma dinámica por medio de for o de .forEach.
+
+  [1.3] Se definirán al menos dos filtros para los productos en la parte izquierda del documento:
+
+  [1.4] El primer filtro será un elemento [select](<https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select>) que muestra todos los vendedores (seller) distintos que hay en los productos del proyecto; y que al ser clickado, hará que el documento solamente muestro los elementos que tengan la propiedad seller con el mismo valor. Para esto, se definirán al menos 4 seller distintos en los productos del objeto products.
+
+  [1.5] El segundo filtro será un input de tipo number acompañado de un botón que contenga el texto “Buscar”. El usuario podrá introducir una cantidad de dinero en el filtro y pulsar buscar, esto hará que solo aparezcan en pantalla los elementos cuyo precio (price) sea menor que esta cantidad.
+
+  [1.6] Habrá un botón “Limpiar Filtros” que al ser pulsado, volverá a pintar en pantalla todos los productos, sin aplicar filtro ninguno.
+
+ 2. Criterios HTML y CSS
+............................
+  [2.1] El código HTML está correctamente estructurado. Hay dos elementos section o article principales que representan los filtros de búsqueda (a la izquierda en escritorio, arriba del contenido en móvil), y los elementos a vender en la tienda (a la derecha en escritorio, abajo de los filtros en móvil).
+
+
+
+  [2.2] Los elementos a vender en la tienda comparten la misma clase de CSS, que define una carta de producto y tiene algún efecto :hover cuando pasa el ratón sobre ellas.
+
+
+
+  [2.3] La web cuenta con media queries para escritorio y móvil. Así como una correcta estructura y posicionamiento de elementos por medio de flex o grid.
+
+
+
+  [2.4] Los productos tienen imágenes correctas que se ven en la carta de componente de cada uno
+
