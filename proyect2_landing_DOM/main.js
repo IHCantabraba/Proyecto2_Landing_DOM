@@ -156,9 +156,17 @@ const AddproductsTosection = (products) => {
     articleDescriptionDiv.appendChild(articleDescription)
     productArticle.appendChild(articleDescriptionDiv)
     /* un precio */
+    const priceAndSellerDiv = document.createElement('div')
+    priceAndSellerDiv.id = 'PriceSellerDiv'
     const ArticlePrice = document.createElement('h2')
+    const ArticleSeller = document.createElement('h2')
+    ArticleSeller.id = 'articleSeller'
+    ArticleSeller.innerHTML = `${current.seller}`
+    ArticlePrice.id = 'articlePrice'
     ArticlePrice.innerHTML = `${current.price}€`
-    productArticle.appendChild(ArticlePrice)
+    priceAndSellerDiv.appendChild(ArticleSeller)
+    priceAndSellerDiv.appendChild(ArticlePrice)
+    productArticle.appendChild(priceAndSellerDiv)
     /* número de estrellas y comentarios */
     const divOpinion = document.createElement('div')
     divOpinion.id = 'estrellas-div'
@@ -186,7 +194,6 @@ const addEventListenerToSellerFilter = () => {
   /*creamos un listener del evento "cambio de vendedor"*/
   sellerfilter.addEventListener('change', (event) => {
     /* Eliminar todos los productos */
-    // const producSection = document.querySelector('.products')
     sectionProducts.innerHTML = ''
     /*crear un array para filtar*/
     const sellerArray = []
@@ -207,6 +214,8 @@ const ApplyPriceFilter = (productos) => {
   const priceFilterBtn = document.querySelector('#btn-price')
   // const Articulos = doucment.querySelector('.products')
   const filtro = document.getElementById('price-selector')
+  const sectionProducts = document.querySelector('.products')
+  const sellerfilter = document.querySelector('#selector')
 
   priceFilterBtn.addEventListener('click', (event) => {
     /* borrar todos los productos*/
@@ -219,7 +228,13 @@ const ApplyPriceFilter = (productos) => {
       console.log(Number(filtro.value))
       productos.forEach(function (current) {
         if (Number(current.price) <= filtro.value) {
-          priceProducts.push(current)
+          if (sellerfilter.value != 'All') {
+            if (current.seller === sellerfilter.value) {
+              priceProducts.push(current)
+            }
+          } else {
+            priceProducts.push(current)
+          }
         }
       })
       if (!priceProducts.length == 0) {
@@ -325,6 +340,7 @@ addOptionsSellerPicker()
 /* añadir productos a la sección */
 AddproductsTosection(products)
 /* filtrar productos según vendedor */
-addEventListenerToSellerFilter()
+/*addEventListenerToSellerFilter()*/
+/* filtrar productos segun precio */
 ApplyPriceFilter(products)
 RemoveFilters(products)

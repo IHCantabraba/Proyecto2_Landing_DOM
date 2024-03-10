@@ -92,6 +92,12 @@
   --ihc-nav-text-size-s: 10px;
   --ihc-nav-text-size-m: 15px;
   --ihc-nav-text-size-l: 20px;
+
+  --ihc-footer-height: 500px;
+  --ihc-header-height: 100px;
+  --ihc-body--height: (
+    100vh- var(--ihc-header-height)-var(--ihc-footer-height)
+  );
 }
 * {
   border-radius: 5px;
@@ -100,10 +106,14 @@
 }
 ul {
   list-style-type: none;
+  padding: 0px;
+  margin: 0px;
 }
 li {
   display: flex;
   align-items: center;
+  padding: 0px;
+  margin: 0px;
 }
 a {
   text-decoration: none;
@@ -111,12 +121,13 @@ a {
 }
 
 footer {
-  height: 10vh;
+  max-height: var(--ihc-footer-height);
   width: 100%;
   background-color: rgb(8, 7, 7);
 }
 main {
   background-color: black;
+  min-height: var(--ihc-body--height);
 }
 #app {
   height: 100%;
@@ -234,7 +245,7 @@ main {
 }
 /* estilo sección HEADER */
 #header {
-  height: 10vh;
+  height: var(--ihc-header-height);
   width: 100%;
   background-color: rgb(7, 7, 7);
   display: flex;
@@ -323,7 +334,19 @@ main {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-.ficha > h2 {
+#articlePrice {
+  align-self: flex-start;
+  margin: 0;
+  font-size: 14px;
+}
+#PriceSellerDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0px;
+  padding: 0px;
+}
+#articleSeller {
   align-self: flex-start;
   margin: 0;
   font-size: 14px;
@@ -364,8 +387,8 @@ main {
 footer {
   background-color: var(--ihc-footer-background);
   width: 100%;
-  bottom: 0.2%;
-  height: 30%;
+  bottom: 0px;
+  max-height: var(--ihc-footer-height);
   text-align: center;
   padding-top: 1%;
   padding-bottom: 3%;
@@ -378,19 +401,17 @@ footer > nav > h5 {
   padding-bottom: var(--ihc-padding-m);
   font-size: var(--ihc-footer-text-size-m);
   margin: var(--ihc-padding-s);
+  max-height: var(--ihc-footer-height);
 }
 footer > nav {
   border-right: 2px solid var(--ihc-text-tertiary);
   text-align: left;
-  padding: var(--ihc-padding-l);
-  margin-right: var(--ihc-padding-s);
 }
 footer > nav:nth-of-type(5) {
   border: 0px;
 }
 footer > nav > ul {
   display: grid;
-
   grid-template-columns: 1fr;
   justify-content: center;
   padding-bottom: var(--ihc-padding-m);
@@ -407,7 +428,14 @@ footer > nav > ul > li > a {
 }
 #whas-contact {
   display: flex;
-  margin: var(--ihc-margin-m) 0px;
+  margin: 0px;
+  padding: 0px;
+}
+#logo-content,
+#schedule,
+#schedule > p {
+  margin: 0px;
+  padding: 0px;
 }
 #schedule > p {
   color: var(--ihc-text-secondary);
