@@ -352,7 +352,7 @@ main {
   font-size: 14px;
 }
 .ficha:hover {
-  margin-bottom: 15px;
+  scale: 1.01;
 }
 #estrellas-div {
   display: flex;

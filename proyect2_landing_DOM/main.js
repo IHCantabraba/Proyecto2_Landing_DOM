@@ -116,7 +116,7 @@ const GetProductsPrice = () => {
   const selectorPrecio = document.querySelector('#price-selector')
   selectorPrecio.min = Math.min(...prices)
   selectorPrecio.max = Math.max(...prices)
-  selectorPrecio.placeholder = ` max price ${Math.min(...prices)}`
+  selectorPrecio.placeholder = ` min price ${Math.min(...prices)}€`
   /* TODO: Revisar esta asignación de ancho */
   selectorPrecio.setAttribute(
     'size',
@@ -186,71 +186,8 @@ const AddproductsTosection = (products) => {
     seccionProducts.appendChild(productArticle)
   })
 }
-/*crear una funcion para modificar la lista de productos que se muestran */
-const addEventListenerToSellerFilter = () => {
-  /*obtenemos la sección*/
-  const sectionProducts = document.querySelector('.products')
-  const sellerfilter = document.querySelector('#selector')
-  /*creamos un listener del evento "cambio de vendedor"*/
-  sellerfilter.addEventListener('change', (event) => {
-    /* Eliminar todos los productos */
-    sectionProducts.innerHTML = ''
-    /*crear un array para filtar*/
-    const sellerArray = []
-    if (event.target.value === 'All') {
-      AddproductsTosection(products)
-    } else {
-      products.forEach(function (current) {
-        if (current.seller === event.target.value) {
-          sellerArray.push(current)
-        }
-      })
-      AddproductsTosection(sellerArray)
-    }
-  })
-}
-/* filtrar por precio introducido los productos al hacer click en en "buscar" */
-const ApplyPriceFilter = (productos) => {
-  const priceFilterBtn = document.querySelector('#btn-price')
-  // const Articulos = doucment.querySelector('.products')
-  const filtro = document.getElementById('price-selector')
-  const sectionProducts = document.querySelector('.products')
-  const sellerfilter = document.querySelector('#selector')
 
-  priceFilterBtn.addEventListener('click', (event) => {
-    /* borrar todos los productos*/
-    const ProductosActuales = document.querySelector('.products')
-    ProductosActuales.innerHTML = ''
-    /*crear un array para filtar*/
-    const priceProducts = []
-    if (typeof Number(filtro.value) == 'number' && Number(filtro.value) != 0) {
-      console.log(typeof Number(filtro.value))
-      console.log(Number(filtro.value))
-      productos.forEach(function (current) {
-        if (Number(current.price) <= filtro.value) {
-          if (sellerfilter.value != 'All') {
-            if (current.seller === sellerfilter.value) {
-              priceProducts.push(current)
-            }
-          } else {
-            priceProducts.push(current)
-          }
-        }
-      })
-      if (!priceProducts.length == 0) {
-        AddproductsTosection(priceProducts)
-      } else if (priceProducts.length == 0) {
-        const info = document.createElement('h3')
-        info.innerHTML = 'No Results for search criteria'
-        ProductosActuales.appendChild(info)
-      }
-    } else {
-      AddproductsTosection(productos)
-    }
-  })
-}
-
-const RemoveFilters = (productos) => {
+function RemoveFilters() {
   const sellerFilter = document.querySelector('#selector')
   const priceFilter = document.querySelector('#price-selector')
   const RemoveBtn = document.querySelector('#btn-remove-filter')
@@ -272,7 +209,6 @@ const RemoveFilters = (productos) => {
     }
   })
 }
-
 const AddOptionsToHeader = (menuOptions) => {
   const headerArea = document.querySelector('#header')
   const headerNavPc = document.createElement('nav')
@@ -330,6 +266,116 @@ const AddOptionsToHeader = (menuOptions) => {
   DivforIcons.appendChild(headerLorry)
   headerArea.appendChild(DivforIcons)
 }
+
+const AplicarFiltroVendedor = (products) => {
+  /* array para recoger los productos del vendedor vendedor */
+  const FiltradosPorVendor = []
+  console.log('products introducidos son: ' + products)
+  /* selector de Vendedor */
+  const sellerFilter = document.querySelector('#selector')
+  /* productos actuales en la vista de usuario */
+  const ProductosActuales = document.querySelector('.products')
+  /* eliminar todos los usuarios */
+  ProductosActuales.innerHTML = ''
+  for (let product of products) {
+    if (sellerFilter.value != 'All') {
+      if (sellerFilter.value === product.seller) {
+        console.log('the value pass seller filter')
+        FiltradosPorVendor.push(product)
+      }
+    } else {
+      console.log('all products will be added')
+      FiltradosPorVendor.push(product)
+    }
+  }
+  console.log(FiltradosPorVendor)
+  return FiltradosPorVendor
+}
+
+const AplicarFiltroPrecio = (productsVendedor) => {
+  /* array para recoger los productos del vendedor vendedor */
+  const FiltradosPorPrecio = []
+  /* selector de Vendedor */
+  const priceFilter = document.querySelector('#price-selector')
+  /* productos actuales en la vista de usuario */
+  const ProductosActuales = document.querySelector('.products')
+  /* eliminar todos los usuarios */
+  ProductosActuales.innerHTML = ''
+  for (let product of productsVendedor) {
+    console.log(product)
+    if (priceFilter.value != '') {
+      console.log('tiene valor')
+      if (Number(priceFilter.value) > 0) {
+        console.log(`Valor ${priceFilter.value} es mayor que 0`)
+        console.log(priceFilter.value < product.price)
+        console.log('filtro introducido')
+        if (product.price < priceFilter.value) {
+          console.log('product pass price filter')
+          FiltradosPorPrecio.push(product)
+          // } else {
+          //   console.log('all producs will be added')
+          //   FiltradosPorPrecio.push(product)
+        }
+      }
+    } else {
+      console.log('all producs will be added')
+      FiltradosPorPrecio.push(product)
+    }
+  }
+  return FiltradosPorPrecio
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/* Función para aplicar los dos filtro (vendedor y precio máximo) */
+const AmbosFiltros = (products) => {
+  /* boton de aplicar filtro*/
+  const priceFilterBtn = document.querySelector('#btn-price')
+  /* Resultado de los filtros */
+
+  /* cada vez que se haga click en el boton ...*/
+  priceFilterBtn.addEventListener('click', () => {
+    /* borrar todos los productos*/
+    const ProductosActuales = document.querySelector('.products')
+    ProductosActuales.innerHTML = ''
+    const filtroVendedor = AplicarFiltroVendedor(products)
+    const ResultadoAmbosFiltros = AplicarFiltroPrecio(filtroVendedor)
+    console.log(ResultadoAmbosFiltros.lenght > 0)
+    if (ResultadoAmbosFiltros.length > 0) {
+      AddproductsTosection(ResultadoAmbosFiltros)
+    } else {
+      const Result = document.createElement('p')
+      Result.innerHTML = '<b> No results found </b>'
+      ProductosActuales.appendChild(Result)
+    }
+  })
+}
+//   const priceFilterBtn = document.querySelector('#btn-price')
+//   const filtro = document.getElementById('price-selector')
+//   const sellerfilter = document.querySelector('#selector')
+
+//   priceFilterBtn.addEventListener('click', () => {
+//     /* borrar todos los productos*/
+//     const ProductosActuales = document.querySelector('.products')
+//     ProductosActuales.innerHTML = ''
+//     /*crear un array para filtar*/
+//     const priceProducts = []
+//     if (typeof Number(filtro.value) == 'number' && Number(filtro.value) != 0) {
+//       productos.forEach(function (current) {
+//         if (Number(current.price) <= filtro.value) {
+//           if (sellerfilter.value != 'All') {
+//             if (current.seller === sellerfilter.value) {
+//               priceProducts.push(current)
+//             }
+//           } else {
+//             priceProducts.push(current)
+//           }
+//         }
+//       })
+//     }
+//   })
+// }
+//////////////////// Ejecución ///////////////////////
+/* EJECUCIÓN */
 AddOptionsToHeader(menuOptions)
 /* obtener lista de vendedores*/
 GetSellers()
@@ -339,8 +385,6 @@ GetProductsPrice()
 addOptionsSellerPicker()
 /* añadir productos a la sección */
 AddproductsTosection(products)
-/* filtrar productos según vendedor */
-/*addEventListenerToSellerFilter()*/
-/* filtrar productos segun precio */
-ApplyPriceFilter(products)
+AmbosFiltros(products)
+// ApplyPriceFilter(products)
 RemoveFilters(products)
